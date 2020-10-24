@@ -10,7 +10,7 @@ namespace _1024
 {
     class Program
     {
-        enum RSP { 가위 = 1, 바위, 보, stop };
+        enum RSP { 가위 = 1, 바위, 보};
 
 
         static void Main(string[] args)
@@ -164,7 +164,7 @@ namespace _1024
                 ForegroundColor = ConsoleColor.White;
                 SetCursorPosition(0, 17);
                 WriteLine("게임종료를 원하시면 종료를 입력해주시고");
-                WriteLine("게임진행을 원하시면 아무키나 두번 눌러주세요");
+                WriteLine("게임진행을 원하시면 아무키나 눌러주세요");
 
                 player = ReadLine();
 
