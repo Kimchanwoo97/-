@@ -168,13 +168,23 @@ namespace _1024
 
                 player = ReadLine();
 
-                if (player == "종료")
+                //if (player == "종료")
+                //{
+                //    Environment.Exit(0);
+                //}
+                //else
+                //{
+                //    Clear();
+                //}
+                
+                 switch(player)
                 {
-                    Environment.Exit(0);
-                }
-                else
-                {
-                    Clear();
+                    case "종료":
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Clear();
+                        break;
                 }
 
 
