@@ -65,34 +65,32 @@ namespace _1024
                         Environment.Exit(0);
                     }
                 }
+                
+                if (player == "가위")
+                   {
+                       WriteLine("  ┏━┓┏━┓");
+                       WriteLine("  ┃ ┃┃ ┃");
+                       WriteLine("┏━┨ ┗┛ ┣┳┓");
+                       WriteLine("┃ ┛    ┃┃┃");
+                       WriteLine("┗━━┓  ┏━━┛");
+                   }
+                else if (player == "바위")
+                   {
+                       WriteLine("┏━┯━┯━┯━┯━┓");
+                       WriteLine("┃ ┃ ┃ ┃ ┃ ┃");
+                       WriteLine("┣━┷━┷━┷━┷━┫");
+                       WriteLine("┃         ┃");
+                       WriteLine("┗━━┓  ┏━━━┛");
+                   }
                 else
-                {
-                    if (player == "가위")
-                    {
-                        WriteLine("  ┏━┓┏━┓");
-                        WriteLine("  ┃ ┃┃ ┃");
-                        WriteLine("┏━┨ ┗┛ ┣┳┓");
-                        WriteLine("┃ ┛    ┃┃┃");
-                        WriteLine("┗━━┓  ┏━━┛");
-                    }
-                    else if (player == "바위")
-                    {
-                        WriteLine("┏━┯━┯━┯━┯━┓");
-                        WriteLine("┃ ┃ ┃ ┃ ┃ ┃");
-                        WriteLine("┣━┷━┷━┷━┷━┫");
-                        WriteLine("┃         ┃");
-                        WriteLine("┗━━┓  ┏━━━┛");
-                    }
-                    else
-                    {
-                        WriteLine("  ┏━┯━┯━┯━┓");
-                        WriteLine("┏━┫ ┃ ┃ ┃ ┃");
-                        WriteLine("┃ ┃ ┃ ┃ ┃ ┃");
-                        WriteLine("┃         ┃");
-                        WriteLine("┗━━┓  ┏━━━┛");
-                    }
-                }
-
+                   {
+                       WriteLine("  ┏━┯━┯━┯━┓");
+                       WriteLine("┏━┫ ┃ ┃ ┃ ┃");
+                       WriteLine("┃ ┃ ┃ ┃ ┃ ┃");
+                       WriteLine("┃         ┃");
+                       WriteLine("┗━━┓  ┏━━━┛");
+                   }
+                    
                 SetCursorPosition(15, 11);
                 WriteLine("VS");
 
