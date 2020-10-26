@@ -150,7 +150,7 @@ namespace _1024
                     win++;
                     play++;
                 }
-                else if (player == "가위" && com == "바위" || player == "바위" && com == "보" || player == "보" && com == "가위")
+                else//(player == "가위" && com == "바위" || player == "바위" && com == "보" || player == "보" && com == "가위")
                 {
                     WriteLine($"\nplayer : {player} vs {com} : com");
                     ForegroundColor = ConsoleColor.Red;
