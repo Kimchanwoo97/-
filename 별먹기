@@ -1,0 +1,112 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Console;
+using static System.Threading.Thread;
+
+namespace _202011027
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Random r = new Random();
+
+            int x, y, x1, y1, x2, y2;
+            int playerX = 30, playerY = 15; //플레이어 위치
+
+            x = r.Next(0, 60);
+            y = r.Next(0, 30);
+            x1 = r.Next(0, 60);
+            y1 = r.Next(0, 30);
+            x2 = r.Next(0, 60);
+            y2 = r.Next(0, 30); //적 위치 랜덤값
+
+            string player = "●";
+            bool s = true, s1 = true, s2 = true, end = false;
+
+            CursorVisible = false; //커서삭제
+
+            while (true)
+            {
+                Clear();
+
+                if (s)
+                {
+                    SetCursorPosition(x, y);
+                    Write("★");
+                }
+
+                if (s1)
+                {
+                    SetCursorPosition(x1, y1);
+                    Write("★");
+                }
+
+                if (s2)
+                {
+                    SetCursorPosition(x2, y2);
+                    Write("★");
+                }
+
+                if (end)
+                {
+                    SetCursorPosition(30, 15);
+                    Write("게임종료");
+                }
+
+
+                SetCursorPosition(playerX, playerY);
+                Write(player);
+
+                ConsoleKey key = ReadKey(true).Key;
+
+                //플레이어 이동 제한거리
+                switch (key)
+                {
+                    case ConsoleKey.UpArrow:
+                        if (playerY != 0)
+                            playerY--;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        if (playerY != 29)
+                            playerY++;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        if (playerX != 59)
+                            playerX++;
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        if (playerX != 0)
+                            playerX--;
+                        break;
+                }
+
+                if (playerX == x && playerY == y)
+                {
+                    s = false;
+                }
+                else if (playerX == x1 && playerY == y1)
+                {
+                    s1 = false;
+                }
+                else if (playerX == x2 && playerY == y2)
+                {
+                    s2 = false;
+                }
+
+                if (s != true && s1 != true && s2 != true)
+                {
+                    Clear();
+                    SetCursorPosition(30, 15);
+                    WriteLine("게임종료");
+                    break;
+
+                }
+            }
+        }
+    }
+}
