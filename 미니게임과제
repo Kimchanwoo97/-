@@ -1,0 +1,519 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Console;
+using static System.Threading.Thread;
+
+namespace ConsoleApp8
+{
+    class Rps
+    {
+        enum RSP { 가위 = 1, 바위, 보 };
+        public void Play()
+        {
+            Random r = new Random();
+            int Count = 0, win = 0, Lose = 0, Draw = 0, play = 0;
+
+            Clear();
+            while (true)
+            {
+                WriteLine("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┏━━━━━━━━━━━━━┓");
+                WriteLine($"┃                                          ┃  ┃   승리 : {win}  ┃");
+                WriteLine("┃                                          ┃  ┃             ┃");
+                WriteLine($"┃                                          ┃  ┃   패배 : {Lose}  ┃");
+                WriteLine("┃                                          ┃  ┃             ┃");
+                WriteLine($"┃                                          ┃  ┃  무승부 : {Draw} ┃");
+                WriteLine("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┗━━━━━━━━━━━━━┛");
+                SetCursorPosition(11, 2);
+                ForegroundColor = ConsoleColor.Yellow;
+                WriteLine("***가위바위보  게임***");
+                SetCursorPosition(2, 3);
+                ForegroundColor = ConsoleColor.Blue;
+                WriteLine("게임방법 : 가위 , 바위 , 보 를 적어주세요");
+                SetCursorPosition(17, 5);
+                ForegroundColor = ConsoleColor.Red;
+                WriteLine($"경고 : {Count}회");
+
+
+                ForegroundColor = ConsoleColor.White;
+                SetCursorPosition(0, 7);
+
+                Write("무엇을 내시겠습니까? ");
+                string player = ReadLine();
+
+                RSP rsp = (RSP)r.Next(1, 4);
+                string com = rsp.ToString();
+
+                if (player != "가위" && player != "바위" && player != "보")
+                {
+                    Write("잘못 입력 하셨습니다 ");
+                    ForegroundColor = ConsoleColor.Red;
+                    WriteLine(" - 경고 -");
+                    ForegroundColor = ConsoleColor.White;
+                    Count++;
+
+                    if (Count > 3)
+                    {
+                        WriteLine("이미 3번의 경고 받으셨습니다");
+                        Sleep(1000);
+                        WriteLine("프로그램을 종료합니다");
+                        Environment.Exit(0);
+                    }
+                }
+
+                if (player == "가위")
+                {
+                    WriteLine("  ┏━┓┏━┓");
+                    WriteLine("  ┃ ┃┃ ┃");
+                    WriteLine("┏━┨ ┗┛ ┣┳┓");
+                    WriteLine("┃ ┛    ┃┃┃");
+                    WriteLine("┗━━┓  ┏━━┛");
+                }
+                else if (player == "바위")
+                {
+                    WriteLine("┏━┯━┯━┯━┯━┓");
+                    WriteLine("┃ ┃ ┃ ┃ ┃ ┃");
+                    WriteLine("┣━┷━┷━┷━┷━┫");
+                    WriteLine("┃         ┃");
+                    WriteLine("┗━━┓  ┏━━━┛");
+                }
+                else
+                {
+                    WriteLine("  ┏━┯━┯━┯━┓");
+                    WriteLine("┏━┫ ┃ ┃ ┃ ┃");
+                    WriteLine("┃ ┃ ┃ ┃ ┃ ┃");
+                    WriteLine("┃         ┃");
+                    WriteLine("┗━━┓  ┏━━━┛");
+                }
+
+                SetCursorPosition(15, 11);
+                WriteLine("VS");
+
+                if (com == "가위")
+                {
+                    SetCursorPosition(20, 8);
+                    WriteLine("  ┏━┓┏━┓");
+                    SetCursorPosition(20, 9);
+                    WriteLine("  ┃ ┃┃ ┃");
+                    SetCursorPosition(20, 10);
+                    WriteLine("┏━┨ ┗┛ ┣┳┓");
+                    SetCursorPosition(20, 11);
+                    WriteLine("┃ ┛    ┃┃┃");
+                    SetCursorPosition(20, 12);
+                    WriteLine("┗━━┓  ┏━━┛");
+                }
+                else if (com == "바위")
+                {
+                    SetCursorPosition(20, 8);
+                    WriteLine("┏━┯━┯━┯━┯━┓");
+                    SetCursorPosition(20, 9);
+                    WriteLine("┃ ┃ ┃ ┃ ┃ ┃");
+                    SetCursorPosition(20, 10);
+                    WriteLine("┣━┷━┷━┷━┷━┫");
+                    SetCursorPosition(20, 11);
+                    WriteLine("┃         ┃");
+                    SetCursorPosition(20, 12);
+                    WriteLine("┗━━┓  ┏━━━┛");
+                }
+                else if (com == "보")
+                {
+                    SetCursorPosition(20, 8);
+                    WriteLine("  ┏━┯━┯━┯━┓");
+                    SetCursorPosition(20, 9);
+                    WriteLine("┏━┫ ┃ ┃ ┃ ┃");
+                    SetCursorPosition(20, 10);
+                    WriteLine("┃ ┃ ┃ ┃ ┃ ┃");
+                    SetCursorPosition(20, 11);
+                    WriteLine("┃         ┃");
+                    SetCursorPosition(20, 12);
+                    WriteLine("┗━━┓  ┏━━━┛");
+                }
+
+                if (player == com)
+                {
+                    WriteLine($"\nplayer : {player} vs {com} : com");
+                    ForegroundColor = ConsoleColor.DarkYellow;
+                    WriteLine("비겼습니다");
+                    Draw++;
+                    play++;
+                }
+                else if (player == "가위" && com == "보" || player == "바위" && com == "가위" || player == "보" && com == "바위")
+                {
+                    WriteLine($"\nplayer : {player} vs {com} : com");
+                    ForegroundColor = ConsoleColor.Blue;
+                    WriteLine("승리 하셨습니다");
+                    win++;
+                    play++;
+                }
+                else
+                {
+                    WriteLine($"\nplayer : {player} vs {com} : com");
+                    ForegroundColor = ConsoleColor.Red;
+                    WriteLine("패배 하였습니다");
+                    Lose++;
+                    play++;
+                }
+
+                ForegroundColor = ConsoleColor.White;
+                SetCursorPosition(0, 17);
+                WriteLine("게임종료를 원하시면 종료를 입력해주시고");
+                WriteLine("게임진행을 원하시면 아무키나 눌러주세요");
+
+                player = ReadLine();
+
+                switch (player)
+                {
+                    case "종료":
+                        return;
+                    default:
+                        Clear();
+                        break;
+                }
+            }
+
+        }
+    }
+
+    class Star
+    {
+        static void Obj(int x, int y, string obj)
+        {
+            SetCursorPosition(x, y);
+            WriteLine(obj);
+        }
+        public void play()
+        {
+            Random r = new Random();
+
+            int x, y, x1, y1, x2, y2;
+            int playerX = 30, playerY = 15; //플레이어 위치
+
+            x = r.Next(0, 60);
+            y = r.Next(0, 30);
+            x1 = r.Next(0, 60);
+            y1 = r.Next(0, 30);
+            x2 = r.Next(0, 60);
+            y2 = r.Next(0, 30); //적 위치 랜덤값
+
+            string player = "○", obj = "★";
+            bool s = true, s1 = true, s2 = true;
+
+            CursorVisible = false; //커서삭제
+
+            while (true)
+            {
+                Clear();
+
+                Obj(playerX, playerY, player);
+
+                if (s)
+                {
+                    Obj(x, y, obj);
+
+                }
+
+                if (s1)
+                {
+                    Obj(x1, y1, obj);
+                }
+
+                if (s2)
+                {
+                    Obj(x2, y2, obj);
+                }
+
+                ConsoleKey key = ReadKey(true).Key;
+
+                //플레이어 이동 제한거리
+                switch (key)
+                {
+                    case ConsoleKey.UpArrow:
+                        if (playerY != 0)
+                            playerY--;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        if (playerY != 29)
+                            playerY++;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        if (playerX != 59)
+                            playerX++;
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        if (playerX != 0)
+                            playerX--;
+                        break;
+                }
+
+                if (playerX == x && playerY == y)
+                {
+                    s = false;
+                }
+                else if (playerX == x1 && playerY == y1)
+                {
+                    s1 = false;
+                }
+                else if (playerX == x2 && playerY == y2)
+                {
+                    s2 = false;
+                }
+
+                if (s != true && s1 != true && s2 != true)
+                {
+                    Clear();
+                    SetCursorPosition(30, 10);
+                    WriteLine("게임종료");
+                    SetCursorPosition(30, 11);
+                    WriteLine("Enter를 누르면 메뉴로 이동합니다");
+
+                    switch (ReadKey(true).Key)
+                    {
+                        case ConsoleKey.Enter:
+                            return;
+                    }
+                }
+            }
+        }
+
+        class Numbeball
+        {
+            public void Play(int count, int numball)
+            {
+                int ballnum = numball;
+                int counts = count;
+                Random r = new Random();
+                int strike, ball;
+                bool result = false;
+                int[] player = new int[numball];
+                int[] com = new int[numball];
+
+                for (int i = 0; i < com.Length; i++)//컴퓨터 중복처리
+                {
+                    int input = r.Next(1, 10);
+                    if (OverlapNum(com, i, input))
+                    {
+                        com[i] = input;
+                    }
+                    else
+                    {
+                        i--;
+                    }
+                }
+
+                Clear();
+
+                for (int i = 0; i < count; i++)
+                {
+                    strike = 0;
+                    ball = 0;
+
+                    WriteLine($"{i + 1}회");
+
+                    for (int j = 0; j < player.Length; j++)
+                    {
+                        Write($"{j + 1}번째 숫자 입력해주세요 : ");
+                        string s = ReadLine();
+
+                        if (int.TryParse(s, out int num))
+                        {
+                            if (num < 1 || num > 9)
+                            {
+                                WriteLine("잘못된 입력 값 입니다.");
+                                j--;
+                            }
+                            else
+                            {
+                                if (OverlapNum(player, j, num))
+                                {
+                                    player[j] = num;
+                                }
+                                else
+                                {
+                                    WriteLine("중복된 숫자가 있습니다");
+                                    j--;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            WriteLine("잘못입력하셨습니다");
+                        }
+                    }
+
+                    for (int j = 0; j < player.Length; j++)
+                    {
+                        if (player[j] == com[j])
+                        {
+                            strike++;
+                        }
+                        else
+                        {
+                            for (int k = 0; k < player.Length; k++)
+                            {
+                                if (player[j] == com[k])
+                                {
+                                    ball++;
+                                }
+                            }
+                        }
+                    }
+
+                    WriteLine($"{strike}스트라이크 , {ball}볼");
+
+                    if (strike >= player.Length)
+                    {
+                        result = true;
+                        break;
+                    }
+                }
+                if (result)
+                {
+                    WriteLine("숫자를 전부 맞추셨습니다");
+                }
+                else if (!result && counts >= count)
+                {
+                    WriteLine($"컴퓨터의 숫자는 {com[0]}, {com[1]}, {com[2]} 입니다");
+                }
+            }
+
+            static bool OverlapNum(int[] num, int numball, int input)//중복처리를 위한 메소드 //1~9 사이 3개 생성,중복되면 거짓을 위해 만든 것.
+            {
+                for (int i = 0; i < numball; i++)
+                {
+                    if (input == num[i])
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            public void Game()
+            {
+                int menunumber = 0;
+
+                while (true)
+                {
+                    Clear();
+
+                    WriteLine("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+                    for (int i = 0; i < 13; i++)
+                    {
+                        WriteLine("┃                                 ┃");
+                    }
+                    WriteLine("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+
+                    SetCursorPosition(8, 3);
+                    WriteLine("게임 메뉴");
+                    SetCursorPosition(8, 5);
+                    WriteLine("1.쉬움");
+                    SetCursorPosition(8, 7);
+                    WriteLine("2.어려움");
+                    SetCursorPosition(8, 9);
+                    WriteLine("3.지옥");
+                    SetCursorPosition(8, 11);
+                    WriteLine("4.나가기");
+                    SetCursorPosition(5, 5 + (menunumber * 2));
+                    WriteLine("→");
+                    Numbeball ball = new Numbeball();
+
+
+                    switch (ReadKey(true).Key)
+                    {
+
+                        case ConsoleKey.UpArrow:
+                            if (menunumber != 0) menunumber--;
+                            break;
+                        case ConsoleKey.DownArrow:
+                            if (menunumber != 3) menunumber++;
+                            break;
+                        case ConsoleKey.Enter:
+                            switch (menunumber)
+                            {
+                                case 0:
+                                    ball.Play(9, 3);
+                                    Sleep(5000);
+                                    break;
+                                case 1:
+                                    ball.Play(9, 4);
+                                    Sleep(5000);
+                                    break;
+                                case 2:
+                                    ball.Play(7, 4);
+                                    Sleep(5000);
+                                    break;
+                                case 3:
+                                    return;
+                            }
+                            break;
+                    }
+                }
+            }
+        }
+        class Program
+        {
+            static void Main(string[] args)
+            {
+                int menunumber = 0;
+
+                while (true)
+                {
+                    Clear();
+
+                    WriteLine("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+                    for (int i = 0; i < 13; i++)
+                    {
+                        WriteLine("┃                                 ┃");
+                    }
+                    WriteLine("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+
+                    SetCursorPosition(8, 3);
+                    WriteLine("게임 메뉴");
+                    SetCursorPosition(8, 5);
+                    WriteLine("1.가위 바위 보");
+                    SetCursorPosition(8, 7);
+                    WriteLine("2.숫자 야구");
+                    SetCursorPosition(8, 9);
+                    WriteLine("3.별먹기");
+                    SetCursorPosition(8, 11);
+                    WriteLine("4.종료");
+                    SetCursorPosition(5, 5 + (menunumber * 2));
+                    WriteLine("→");
+
+                    switch (ReadKey(true).Key)
+                    {
+                        case ConsoleKey.UpArrow:
+                            if (menunumber != 0) menunumber--;
+                            break;
+                        case ConsoleKey.DownArrow:
+                            if (menunumber != 3) menunumber++;
+                            break;
+                        case ConsoleKey.Enter:
+                            switch (menunumber)
+                            {
+                                case 0:
+                                    Rps rsp = new Rps();
+                                    rsp.Play();
+                                    break;
+                                case 1:
+                                    Numbeball ball = new Numbeball();
+                                    ball.Game();
+                                    break;
+                                case 2:
+                                    Star star = new Star();
+                                    star.play();
+                                    break;
+                                case 3:
+                                    SetCursorPosition(0, 15);
+                                    Environment.Exit(0);
+                                    break;
+                            }
+                            break;
+                    }
+                }
+            }
+        }
+    }
+}
