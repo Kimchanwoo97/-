@@ -1,0 +1,77 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Console;
+namespace ConsoleApp4
+{
+    class Screen
+    {
+        public void PlayerScreen()
+        {
+            ForegroundColor = ConsoleColor.Yellow;
+            SetCursorPosition(14, 1);
+            WriteLine("☞ Player ☜");
+
+            ForegroundColor = ConsoleColor.White;
+            SetCursorPosition(0, 3);
+            WriteLine("┏━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┓");
+            for (int i = 0; i < 9; i++)
+            {
+                WriteLine("┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃");
+                WriteLine("┣━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━┫");
+            }
+            WriteLine("┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃");
+            WriteLine("┗━━━┻━━━┻━━━┻━━━┻━━━┻━━━┻━━━┻━━━┻━━━┻━━━┛");
+        }
+        public void NicheScreen()
+        {
+            for(int i = 0; i < 21; i++)
+            {
+                SetCursorPosition(45, 3+i);
+                WriteLine("┃┃");
+            }
+        }
+        public void ComScreen()
+        {
+            ForegroundColor = ConsoleColor.Yellow;
+            SetCursorPosition(66, 1);
+            WriteLine("☞ Com ☜");
+
+            ForegroundColor = ConsoleColor.White;
+            SetCursorPosition(50, 3);
+            WriteLine("┏━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┓");
+            for (int i = 0; i < 9; i++)
+            {
+                SetCursorPosition(50, 4+i*2);
+                WriteLine("┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃");
+                SetCursorPosition(50, 5+i*2);
+                WriteLine("┣━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━┫");
+            }
+            SetCursorPosition(50, 22);
+            WriteLine("┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃   ┃");
+            SetCursorPosition(50, 23);
+            WriteLine("┗━━━┻━━━┻━━━┻━━━┻━━━┻━━━┻━━━┻━━━┻━━━┻━━━┛");
+        }
+    }
+
+    class Location
+    {
+        public void CPLocation()
+        {
+
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Screen screen = new Screen();
+
+            screen.PlayerScreen();
+            screen.NicheScreen();
+            screen.ComScreen();
+        }
+    }
+}
